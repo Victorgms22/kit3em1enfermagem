@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "sdk_version": "3.1.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "kit-3-em-1",
+      "version": "0.1.0",
+      "title": "kit 3 em 1"
+    },
+    "tools": [
+      {
+        "name": "get_kit_overview",
+        "title": "Kit overview",
+        "description": "Describe the Kit 3 em 1 de Enfermagem: its 3 materials, audience, how to use it and price status.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_faq",
+        "title": "Search FAQ",
+        "description": "List the kit's frequently asked questions, optionally filtered by a keyword (Portuguese).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Optional keyword, e.g. 'celular' or 'pagamento'.",
+              "type": "string",
+              "maxLength": 100
+            }
+          },
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
