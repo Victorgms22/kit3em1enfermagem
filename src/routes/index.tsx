@@ -6,6 +6,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import hero from "@/assets/hero-kit.jpg";
+import { useWebMCP } from "use-webmcp-tool";
+import { runWebMCPTool } from "@/lib/webmcp-telemetry";
+import { overviewText, faqText } from "@/lib/kit-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -101,6 +104,26 @@ function Head({ t, s, dark }: { t: string; s?: string; dark?: boolean }) {
 }
 
 function Index() {
+  useWebMCP({
+    name: "get_kit_overview",
+    description: "Describe the kit shown on this page: its 3 materials, audience, how to use it and price status.",
+    annotations: { readOnlyHint: true },
+    execute: () => runWebMCPTool("get_kit_overview", () => overviewText()),
+  });
+  useWebMCP({
+    name: "search_faq",
+    description: "List this page's frequently asked questions, optionally filtered by a keyword.",
+    annotations: { readOnlyHint: true },
+    inputSchema: {
+      type: "object",
+      properties: { query: { type: "string", description: "Optional keyword, e.g. 'celular'." } },
+    },
+    execute: ({ query }: { query?: string }) =>
+      runWebMCPTool("search_faq", () => {
+        if (query !== undefined && typeof query !== "string") throw new Error("query must be text.");
+        return faqText(query).text;
+      }),
+  });
   return (
     <main className="font-sans">
       {/* Hero */}
