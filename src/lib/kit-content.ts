@@ -23,7 +23,7 @@ export const PASSOS = [
 ];
 
 const PENDENTE = "Informação em breve.";
-export const FAQ: { pergunta: string; resposta: string }[] = [
+export const FAQ: { pergunta: string; resposta: string }[] = ([
   ["O que vem no Kit 3 em 1 de Enfermagem?", "O kit reúne três materiais digitais: um cronograma de estudos, um material de cálculo e administração de medicamentos e uma coleção com 2.000 questões de Enfermagem."],
   ["Como vou receber os materiais?", PENDENTE],
   ["O cronograma de estudos pode ser adaptado à minha rotina?", "O cronograma serve como apoio para a organização dos estudos. Confira o formato disponibilizado para saber quais possibilidades de personalização estão incluídas."],
@@ -34,7 +34,7 @@ export const FAQ: { pergunta: string; resposta: string }[] = [
   ["Posso acessar os materiais pelo celular?", PENDENTE],
   ["O acesso aos materiais é vitalício?", PENDENTE],
   ["Como funciona o pagamento?", PENDENTE],
-].map(([pergunta, resposta]) => ({ pergunta, resposta }));
+] as [string, string][]).map(([pergunta, resposta]) => ({ pergunta, resposta }));
 
 export function overviewText() {
   return [
